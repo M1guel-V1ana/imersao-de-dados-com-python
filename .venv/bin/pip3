@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/miguel/novos projetos/imersao-de-dados-com-python/.venv/bin/python3" "$0" "$@"
-' '''
+#!/home/miguel/PycharmProjects/imersao-de-dados-com-python/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
