@@ -89,3 +89,4 @@ print(df.head(10))
 
 print(df.describe(include= 'object'))
 print(df.describe)
+print("hola mundo safado ")
