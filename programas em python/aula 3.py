@@ -92,3 +92,121 @@ print(df_limpar.head())
 #df_limpar['experience_level'].value_counts().plot(kind = 'bar', title = 'Distribuicao_experiencia')
 #plt.show()
 
+# calculando o salário médio para cada um dos niveis
+
+#sns.barplot(data = df_limpar, x='experience_level', y='salary_in_usd')
+#plt.show()
+
+
+# construção de um gráfico com tamanhos padroes usando o plt
+plt.figure(figsize=(10,5))
+sns.barplot(data = df_limpar, x='experience_level', y='salary_in_usd')
+#criando um titulo pro gráfico
+plt.title("Salario médio por nivel de experiencia")
+#titulo do eixo "x"
+plt.xlabel("nivel de experiencia")
+#titulo do eixo "y"
+plt.ylabel("salario medio anual em dolar")
+# exibindo o gráfico
+plt.show()
+
+
+#calculando a estistica para uma melhor representação dos gráficos
+df_limpar.groupby('experience_level')['salary_in_usd'].mean().sort_values(ascending=False)
+
+#utilizando uma variavel para armazenar os valores
+order = df_limpar.groupby('experience_level')['salary_in_usd'].mean().sort_values(ascending=False).index
+print(order)
+
+
+# cosntruindo mais um gráfico só que de maneira ordenada
+plt.figure(figsize = (10,5))
+sns.barplot(data = df_limpar, x='experience_level', y='salary_in_usd', order = order)
+plt.title("salario medio organizado")
+plt.xlabel("nivel de experiencia")
+plt.ylabel("salario medio anual em dolar")
+plt.show()
+
+#utilizando o bin para largura do gráfico
+plt.figure(figsize=(10,5))
+sns.histplot(df_limpar['salary_in_usd'], bins = 50, kde = True)
+plt.title("Distribuição dos salarios anuais")
+plt.xlabel("Nivel de experiencia")
+plt.ylabel("salario medio anual")
+plt.show()
+
+
+#criando gráfico com quartis
+
+plt.figure(figsize=(10,5))
+sns.boxplot(x = df_limpar['salary_in_usd'])
+plt.title("Distribuição anual do salario")
+plt.xlabel("salario in usd ")
+plt.show()
+
+#distribuição dos quartis por nivel de experiencia:
+
+plt.figure(figsize=(10,5))
+sns.boxplot(x = 'experience_level', y = 'salary_in_usd', data = df_limpar, order = order)
+plt.title("Distribuição por senioridade")
+plt.xlabel('nivel de experiencia')
+plt.ylabel('salario em usd')
+plt.show()
+
+
+plt.figure(figsize=(10,5))
+sns.boxplot(x = 'experience_level', y = 'salary_in_usd', data= df_limpar, order = order, palette= 'Set2', hue = 'experience_level') # Usando a variável 'order' já definida
+plt.title('Distribuição por senioridade')
+plt.xlabel('nivel de experiencia')
+plt.ylabel('salario em usd')
+plt.show()
+
+#impot da biblioteca para criar gráficos interativos
+import plotly.express as px
+avg_salary_by_experience = df_limpar.groupby('experience_level')['salary_in_usd'].mean().sort_values(ascending=False).reset_index()
+
+fig = px.bar(
+    avg_salary_by_experience,
+    x='experience_level',
+    y='salary_in_usd',
+    title='Média Salarial por Nível de Experiência (Plotly)',
+    labels={'experience_level': 'Nível de Experiência', 'salary_in_usd': 'Salário Médio Anual (USD)'},
+    color='experience_level', # Colorir as barras por nível de experiência
+    category_orders={'experience_level': order} # Usar a ordem definida anteriormente
+)
+
+fig.show()
+
+#utilizando a mesma biblioteca para criar um gráfico de pizza/torta
+
+remote_contagem = df_limpar['remote_ratio'].value_counts().reset_index()
+remote_contagem.columns =['tipo_trabalho', 'quantidade']
+fig = px.pie(
+    remote_contagem,
+    names = 'tipo_trabalho',
+    values = 'quantidade',
+    title='Proporção dos Tipos de Trabalho Remoto',
+    hole= 0.5,
+    color='tipo_trabalho' # Corrigido para uma coluna existente no DataFrame remote_contagem
+    # category_orders={'experience_level': order} foi removido pois não é aplicável aqui
+)
+
+fig.show()
+
+
+
+
+remote_contagem = df_limpar['remote_ratio'].value_counts().reset_index()
+remote_contagem.columns =['tipo_trabalho', 'quantidade']
+fig = px.pie(
+    remote_contagem,
+    names = 'tipo_trabalho',
+    values = 'quantidade',
+    title='Proporção dos Tipos de Trabalho Remoto',
+    hole= 0.5,
+    color='tipo_trabalho' # Corrigido para uma coluna existente no DataFrame remote_contagem
+    # category_orders={'experience_level': order} foi removido pois não é aplicável aqui
+)
+
+fig.update_traces(textinfo='percent+label')
+fig.show()
