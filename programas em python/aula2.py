@@ -31,7 +31,7 @@ df_salarios['mediana_salarial'] = df_salarios['salario'].fillna(df_salarios['sal
 print(df_salarios)
 
 
-#usando ffill para completar valores que não estão presentes na tabela ex:
+#usando ffill para completar valores que não estão presentes na tabela, ex:
 df_temperatura = pd.DataFrame({
     'dia_semana' : ['S', 'T', "Q", "QUI", 'SEX'],
     'temp': [30, np.nan, np.nan, 20, 19]
