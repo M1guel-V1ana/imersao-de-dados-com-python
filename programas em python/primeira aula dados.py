@@ -15,7 +15,7 @@ print(df.shape)
 
 print(df.columns)
 
-#imprimindo as linhas e colunas de maneira masi legivel
+#imprimindo as linhas e colunas de maneira mais legivel
 
 
 linhas, colunas = df.shape[0], df.shape[1]
@@ -88,4 +88,5 @@ print(df.head(10))
 
 
 print(df.describe(include= 'object'))
-print(df.describe)
+print(df.describe) #descrevendo valores da tabela
+
