@@ -27,7 +27,7 @@ df_salarios = pd.DataFrame({
     'salario':[2000, np.nan, 5000, np.nan, 100000]
 })
 #calculando a media e mediana desses valores e aplicando na tabela
-df_salarios['media_salarial'] = df_salarios['salario'].fillna(df_salarios['salario'].mean()) #media, não é muito bom utilizar qaundo se tem valores muito grandes
+df_salarios['media_salarial'] = df_salarios['salario'].fillna(df_salarios['salario'].mean()) #media, não é muito bom utilizar quando se tem valores muito grandes
 df_salarios['mediana_salarial'] = df_salarios['salario'].fillna(df_salarios['salario'].median())
 print(df_salarios)
 
