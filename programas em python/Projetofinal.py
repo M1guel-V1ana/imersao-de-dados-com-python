@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st # usado para criar e costumizar o compartilhamento de web apps
 
+
+
+
 #__config da pagina
 #definindo o titulo da página, layout e largura
 
