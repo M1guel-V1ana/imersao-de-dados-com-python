@@ -1,5 +1,5 @@
 #importando bibliotecas para o dashboard
-import  pandas as pd
+import pandas as pd
 import plotly.express as px
 import streamlit as st # usado para criar e costumizar o compartilhamento de web apps
 
